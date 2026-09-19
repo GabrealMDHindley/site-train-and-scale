@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Train & Scale — site-train-and-scale
 
-## Getting Started
+The public brand site for [Train & Scale LLC](https://trainandscale.com) — done-for-you
+client-acquisition systems for high-ticket agencies, coaches, and consultants.
 
-First, run the development server:
+Built and deployed by the Universal Business Studio pipeline
+(`clients/train-and-scale/` in the studio repo carries the intake, research, and
+design brief this site was built from).
+
+## Stack
+
+- **Next.js App Router** + TypeScript + Tailwind CSS v4
+- **React Three Fiber / drei** — the ascending wireframe-peak hero scene, built from
+  the brand's own chevron mark
+- **GSAP ScrollTrigger** — the scroll-driven "How It Works" timeline (organic 90-day /
+  paid-ads 120-day tracks)
+- **Framer Motion** — section reveals throughout
+- An OpenArt-generated logo-reveal video powers the loading screen
+  (`public/videos/brand/logo-reveal.mp4`), with a code-only chevron draw-in as the
+  fallback when it's absent — see `src/components/Preloader.tsx`
+
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build   # production build — must pass before every push
+npm run lint    # eslint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Integrations
 
-## Learn More
+- Primary CTA routes to the existing GoHighLevel scheduler
+  (`trainandscale.com/bookrightnow`) — booking is not rebuilt on this site.
+- The contact form posts to `/api/lead`, which forwards to `CRM_WEBHOOK_URL` (a
+  GoHighLevel inbound webhook) once that env var is set in this Vercel project. Until
+  then it falls back to a `mailto:` link client-side.
 
-To learn more about Next.js, take a look at the following resources:
+## Deploys
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Auto-deploys on every push to `main` via the connected GitHub repository (Vercel team
+**SHAI**).

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Preloader from "@/components/Preloader";
 import Hero from "@/components/Hero";
+import Marquee from "@/components/Marquee";
 import Mission from "@/components/Mission";
 import Timeline from "@/components/Timeline";
 import InstallGrid from "@/components/InstallGrid";
+import Vsl from "@/components/Vsl";
 import Results from "@/components/Results";
 import Guarantee from "@/components/Guarantee";
 import TrainingSupport from "@/components/TrainingSupport";
@@ -23,9 +25,11 @@ export default function Home() {
     <>
       <Preloader hasVideo={hasVideo} />
       <Hero />
+      <Marquee />
       <Mission />
       <Timeline />
       <InstallGrid />
+      <Vsl />
       <Results />
       <Guarantee />
       <TrainingSupport />

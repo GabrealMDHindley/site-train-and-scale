@@ -195,6 +195,8 @@ export type Testimonial = {
   quote: string;
   name: string;
   stat: string;
+  /** Vimeo video ID, if a video testimonial is supplied — renders inline instead of just the stat/quote. */
+  vimeoId?: string;
 };
 
 export const testimonials: Testimonial[] = [
@@ -214,6 +216,14 @@ export const testimonials: Testimonial[] = [
     stat: "$0 → $100K in 6mo",
   },
 ];
+
+// The video sales letter — set to a real Vimeo ID once supplied, and the
+// section renders automatically on the next deploy. No ID → no section
+// (never a "coming soon" placeholder).
+export const vsl: { vimeoId: string | null; title: string } = {
+  vimeoId: null,
+  title: "Watch how the system works",
+};
 
 export const support = {
   items: [

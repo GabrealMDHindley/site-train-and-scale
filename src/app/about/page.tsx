@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import FinalCta from "@/components/FinalCta";
-import { guarantee, installs, site } from "@/data/site";
+import { guarantee, packages, site } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -53,18 +54,31 @@ export default function AboutPage() {
         <div className="mx-auto max-w-5xl px-6 sm:px-8">
           <SectionHeading
             eyebrow="What's Installed"
-            title="Every engagement is built around the same core system"
+            title="Seven packages, each a real service agreement"
             description="The exact mix — organic only, paid ads, setting, closing, or both — is scoped to your business on your onboarding call."
           />
           <Reveal className="mt-12">
-            <ul className="mx-auto grid max-w-3xl gap-x-10 gap-y-3 text-sm text-ink-dim sm:grid-cols-2">
-              {installs.map((tile) => (
-                <li key={tile.title} className="flex gap-2">
-                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent-deep/70" />
-                  {tile.title}
+            <ul className="mx-auto grid max-w-3xl gap-3 sm:grid-cols-2">
+              {packages.map((p) => (
+                <li
+                  key={p.id}
+                  className="flex items-baseline justify-between gap-4 rounded-xl border border-white/10 bg-ground px-5 py-4 text-sm"
+                >
+                  <span className="text-ink">{p.label}</span>
+                  <span className="shrink-0 font-mono text-xs text-ink-dim">
+                    {p.subtitle}
+                  </span>
                 </li>
               ))}
             </ul>
+            <p className="mt-8 text-center">
+              <Link
+                href="/#installs"
+                className="text-sm text-accent underline underline-offset-4 transition hover:text-white"
+              >
+                See the full breakdown for each package →
+              </Link>
+            </p>
           </Reveal>
         </div>
       </section>

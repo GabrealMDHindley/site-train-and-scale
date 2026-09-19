@@ -162,46 +162,342 @@ export const timelines: { organic: TimelinePhase[]; paidAds: TimelinePhase[] } =
   ],
 };
 
-export type InstallTile = {
-  title: string;
-  description: string;
+// Every package below mirrors one of Train & Scale's real service agreements
+// verbatim in scope (service-by-service) — nothing invented, nothing priced.
+// "Foundation Build" through "Coaching & Support" groups repeat across tiers
+// because the underlying agreements repeat those same clauses; each tier's
+// staffing/ads/email groups are what actually differ, per the agreement it's
+// drawn from.
+
+export type ServiceGroup = {
+  group: string;
+  items: string[];
 };
 
-export const installs: InstallTile[] = [
+export type PackageGuarantee = {
+  headline: string;
+  note: string;
+};
+
+export type Package = {
+  id: string;
+  label: string;
+  subtitle: string;
+  guarantee: PackageGuarantee;
+  groups: ServiceGroup[];
+};
+
+const FOUNDATION_BUILD: ServiceGroup = {
+  group: "Foundation Build",
+  items: [
+    "Niche selected for your business",
+    "High-ticket offer crafted",
+    "Video sales letter scripted, then fully edited from your footage",
+    "Dedicated CRM built to manage every lead",
+    "Custom lead-generation funnel built and live",
+  ],
+};
+
+const CONTENT_ENGINE: ServiceGroup = {
+  group: "Content Engine",
+  items: [
+    "30 pieces of content written & posted every 30 days — Facebook",
+    "30 pieces of content written & posted every 30 days — Instagram",
+    "30 pieces of content written & posted every 30 days — LinkedIn",
+  ],
+};
+
+const COACHING_SUPPORT: ServiceGroup = {
+  group: "Coaching & Support",
+  items: [
+    "Up to 3 one-on-one calls per week",
+    "24/7 access to ask questions via Slack",
+    "Lifetime access to Train & Scale University",
+    "Lifetime access to Train & Scale Setter Edition",
+    "Lifetime access to Train & Scale Closer Edition",
+  ],
+};
+
+const GUARANTEE_DISCLAIMER =
+  "Conditioned on completing the outreach, sales-call, and tracking requirements outlined in your service agreement.";
+
+export const packages: Package[] = [
   {
-    title: "Appointment Setting",
-    description:
-      "We hire, train, and manage dedicated appointment setters who run every outbound and inbound conversation for you across Facebook, Instagram, and LinkedIn.",
+    id: "foundation",
+    label: "Foundation Build-Out",
+    subtitle: "One-time · 30 days",
+    guarantee: {
+      headline: "14-Day Setup Guarantee",
+      note: "If we don't deliver your foundational build-out within 14 days, you're eligible for a full refund, including processing fees.",
+    },
+    groups: [
+      {
+        group: "Foundation Setup",
+        items: [
+          "Target industry & niche selected",
+          "Initial high-ticket offer crafted",
+          "Pricing strategy set for your offer",
+          "Organic messaging & outreach sequence crafted",
+        ],
+      },
+      {
+        group: "Your Online Presence",
+        items: [
+          "LinkedIn, Facebook & Instagram profiles set up and optimized",
+          "Advertising account set up",
+        ],
+      },
+      {
+        group: "Coaching & Access — 30 Days",
+        items: [
+          "Up to 8 group coaching calls (2/week)",
+          "Complimentary SHAI software access",
+          "Online community access",
+          "Online training library access",
+          "Slack support",
+        ],
+      },
+    ],
   },
   {
-    title: "High-Ticket Closing",
-    description:
-      "We hire, train, and manage high-ticket closers who run every sales call, send your service agreement, and invoice every client who says yes.",
+    id: "tools",
+    label: "Tools & Coaching Access",
+    subtitle: "Monthly · ongoing",
+    guarantee: {
+      headline: "14-Day Setup Guarantee",
+      note: "If we don't deliver your foundational build-out within 14 days, you're eligible for a full refund of that period's payment, including processing fees.",
+    },
+    groups: [
+      {
+        group: "Foundation Setup",
+        items: [
+          "Target industry & niche selected",
+          "Initial high-ticket offer crafted",
+          "Pricing strategy set for your offer",
+          "Organic messaging & outreach sequence crafted",
+        ],
+      },
+      {
+        group: "Your Online Presence",
+        items: [
+          "LinkedIn, Facebook & Instagram profiles set up and optimized",
+          "Advertising account set up",
+        ],
+      },
+      {
+        group: "Ongoing Coaching & Access",
+        items: [
+          "Up to 2 live group coaching calls every week",
+          "SHAI software access (30 days, extends to 60 in month two)",
+          "Online community access — ongoing",
+          "Online training library access — ongoing",
+          "Slack support — ongoing",
+        ],
+      },
+    ],
   },
   {
-    title: "Organic Content Engine",
-    description:
-      "Thirty pieces of content, written and posted to Facebook, Instagram, and LinkedIn every 30 days — plus a custom organic messaging sequence built and launched for you.",
+    id: "diy",
+    label: "Organic DIY",
+    subtitle: "You set & close · 90 days",
+    guarantee: {
+      headline: "$10,000 In New Sales, 90 Days",
+      note: GUARANTEE_DISCLAIMER,
+    },
+    groups: [
+      FOUNDATION_BUILD,
+      CONTENT_ENGINE,
+      {
+        group: "Your Outreach & Closing, Trained By Us",
+        items: [
+          "Custom organic messaging sequence built",
+          "You're trained to run it and book qualified appointments",
+          "Strategic sales script built for your offer",
+          "You're trained to close high-ticket deals with it",
+        ],
+      },
+      {
+        group: "Automated Follow-Up — We Manage It",
+        items: [
+          "Custom SMS follow-up campaign built and managed",
+          "Custom email follow-up campaign built and managed",
+        ],
+      },
+      COACHING_SUPPORT,
+    ],
   },
   {
-    title: "Paid Ads Management",
-    description:
-      "Ad copy, video scripts, and static creatives written and produced for you — Facebook and Instagram campaigns built, launched, and managed with a daily performance tracking sheet.",
+    id: "closing",
+    label: "Closing Installed",
+    subtitle: "1 closer staffed · 90 days",
+    guarantee: {
+      headline: "$30,000 In New Sales, 90 Days",
+      note: GUARANTEE_DISCLAIMER,
+    },
+    groups: [
+      FOUNDATION_BUILD,
+      CONTENT_ENGINE,
+      {
+        group: "Your Outreach, Trained By Us",
+        items: [
+          "Custom organic messaging sequence built",
+          "You're trained to run it and book qualified appointments",
+        ],
+      },
+      {
+        group: "Follow-Up — You Manage, We Train You",
+        items: [
+          "Custom SMS follow-up campaign built",
+          "You're trained to manage it",
+          "Custom email follow-up campaign built",
+          "You're trained to manage it",
+        ],
+      },
+      {
+        group: "High-Ticket Closing Team",
+        items: [
+          "We hire a high-ticket closer for you",
+          "We train them on your offer",
+          "We manage them",
+          "They run every sales call scheduled for you",
+          "They send your service agreement to every new client",
+          "They send invoices to every new client",
+        ],
+      },
+      COACHING_SUPPORT,
+    ],
   },
   {
-    title: "Automated Follow-Up",
-    description:
-      "Custom SMS and email follow-up campaigns, built and managed to convert every prospect who engages with you.",
+    id: "setting",
+    label: "Setting Installed",
+    subtitle: "1 setter staffed · 90 days",
+    guarantee: {
+      headline: "$30,000 In New Sales, 90 Days",
+      note: GUARANTEE_DISCLAIMER,
+    },
+    groups: [
+      FOUNDATION_BUILD,
+      CONTENT_ENGINE,
+      {
+        group: "Appointment Setting Team",
+        items: [
+          "We hire an appointment setter for you",
+          "We train them on your offer",
+          "We manage them",
+          "Custom SMS follow-up campaign built & managed by your setter",
+          "Custom email follow-up campaign built & managed by your setter",
+          "Custom organic messaging sequence built",
+          "Outbound & inbound messages handled — Facebook",
+          "Outbound & inbound messages handled — Instagram",
+          "Outbound & inbound messages handled — LinkedIn",
+        ],
+      },
+      {
+        group: "Your Closing, Trained By Us",
+        items: [
+          "Strategic sales script built for your offer",
+          "You're trained to close high-ticket deals with it",
+        ],
+      },
+      COACHING_SUPPORT,
+    ],
   },
   {
-    title: "CRM + Funnel Build",
-    description:
-      "A dedicated CRM to manage every lead you generate, plus a custom lead-generation funnel — built and live within 72 hours of onboarding.",
+    id: "fullOrganic",
+    label: "Full Organic Team",
+    subtitle: "3 setters + 3 closers · 90 days",
+    guarantee: {
+      headline: "$30,000 In New Sales, 90 Days",
+      note: GUARANTEE_DISCLAIMER,
+    },
+    groups: [
+      FOUNDATION_BUILD,
+      CONTENT_ENGINE,
+      {
+        group: "Appointment Setting Team",
+        items: [
+          "We hire 3 appointment setters for you",
+          "We train them on your offer",
+          "We manage them",
+          "Custom SMS follow-up campaign built & managed",
+          "Custom email follow-up campaign built & managed",
+          "Custom organic messaging sequence built",
+          "Outbound & inbound messages handled — Facebook",
+          "Outbound & inbound messages handled — Instagram",
+          "Outbound & inbound messages handled — LinkedIn",
+        ],
+      },
+      {
+        group: "High-Ticket Closing Team",
+        items: [
+          "We hire 3 high-ticket closers for you",
+          "We train them on your offer",
+          "We manage them",
+          "They run every sales call scheduled for you",
+          "They send your service agreement to every new client",
+          "They send invoices to every new client",
+        ],
+      },
+      COACHING_SUPPORT,
+    ],
   },
   {
-    title: "VSL Scripting & Editing",
-    description:
-      "Your video sales letter scripted for you, then fully edited the moment you send over your raw footage.",
+    id: "fullPaid",
+    label: "Full Team + Paid Ads",
+    subtitle: "3 setters + 3 closers + ads · 120 days",
+    guarantee: {
+      headline: "$100,000 In New Sales, 120 Days",
+      note: GUARANTEE_DISCLAIMER,
+    },
+    groups: [
+      FOUNDATION_BUILD,
+      CONTENT_ENGINE,
+      {
+        group: "Appointment Setting Team",
+        items: [
+          "We hire 3 appointment setters for you",
+          "We train them on your offer",
+          "We manage them",
+          "Custom organic messaging sequence built",
+          "Outbound & inbound messages handled — Facebook",
+          "Outbound & inbound messages handled — Instagram",
+          "Outbound & inbound messages handled — LinkedIn",
+        ],
+      },
+      {
+        group: "Email Marketing & Follow-Up",
+        items: [
+          "Organic email marketing campaign built",
+          "Your team manages outbound marketing emails",
+          "Your team manages inbound marketing emails",
+          "Custom SMS follow-up campaign built & managed",
+          "Custom email follow-up campaign built & managed",
+        ],
+      },
+      {
+        group: "Paid Advertising",
+        items: [
+          "All ad copy written for you",
+          "All ad video creatives scripted",
+          "All static image creatives produced",
+          "Facebook ad campaigns created & managed",
+          "Instagram ad campaigns created & managed",
+          "Daily ad-performance tracking sheet",
+        ],
+      },
+      {
+        group: "High-Ticket Closing Team",
+        items: [
+          "We hire 3 high-ticket closers for you",
+          "We train them on your offer",
+          "We manage them",
+          "They run every sales call scheduled for you",
+          "They send your service agreement to every new client",
+          "They send invoices to every new client",
+        ],
+      },
+      COACHING_SUPPORT,
+    ],
   },
 ];
 

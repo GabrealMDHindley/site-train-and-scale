@@ -17,12 +17,12 @@ export default function Header() {
   }, []);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled ? "bg-ground/85 backdrop-blur-md" : "bg-transparent"
-      }`}
-    >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-8">
+    <header className="fixed inset-x-0 top-3 z-50 flex justify-center px-3 sm:top-4">
+      <div
+        className={`glass-card flex w-full max-w-5xl items-center justify-between !rounded-full px-4 py-2.5 sm:px-6 ${
+          scrolled ? "shadow-[0_16px_46px_-12px_rgba(0,0,0,0.6)]" : ""
+        }`}
+      >
         <Link href="/" className="flex items-center gap-2" aria-label={`${site.name} home`}>
           <Image
             src="/brand/logo.png"
@@ -73,7 +73,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-white/10 bg-ground/95 px-6 py-6 backdrop-blur-md md:hidden">
+        <div className="glass-card absolute inset-x-3 top-[calc(100%+8px)] px-6 py-6 md:hidden">
           <nav className="flex flex-col gap-5" aria-label="Primary mobile">
             {nav.map((item) => (
               <Link

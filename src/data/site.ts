@@ -23,6 +23,20 @@ export const site = {
   url: "https://trainandscale.com",
 } as const;
 
+export type Stat = {
+  target: number;
+  prefix?: string;
+  suffix?: string;
+  label: string;
+};
+
+export const stats: Stat[] = [
+  { target: 72, suffix: "hr", label: "To Your CRM + Funnel Live" },
+  { target: 30, label: "Pieces Of Content Every 30 Days" },
+  { target: 90, label: "Day Guarantee Window" },
+  { target: 30, prefix: "$", suffix: "K", label: "Guaranteed In New Sales" },
+];
+
 export const guarantee = {
   headline: "We guarantee $30,000 in new sales — organically — within 90 days.",
   sub: "Or you get a full refund, including processing fees. That's how confident we are in the system.",

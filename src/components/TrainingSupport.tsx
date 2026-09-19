@@ -1,5 +1,6 @@
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
+import Tilt from "./Tilt";
 import { support } from "@/data/site";
 
 export default function TrainingSupport() {
@@ -11,19 +12,16 @@ export default function TrainingSupport() {
           title="You're never doing this alone"
         />
 
-        <Reveal className="mt-14">
-          <ul className="mx-auto grid max-w-2xl gap-4 sm:grid-cols-2">
-            {support.items.map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-3 rounded-xl border border-white/10 bg-ground p-5 text-sm text-ink-dim"
-              >
+        <div className="mx-auto mt-14 grid max-w-2xl gap-4 sm:grid-cols-2">
+          {support.items.map((item, i) => (
+            <Reveal key={item} delay={i * 0.05}>
+              <Tilt className="glass-card flex h-full items-start gap-3 p-5 text-sm text-ink-dim">
                 <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                 {item}
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+              </Tilt>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );

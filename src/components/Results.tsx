@@ -2,7 +2,7 @@ import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import Tilt from "./Tilt";
 import VimeoEmbed from "./VimeoEmbed";
-import { testimonials } from "@/data/site";
+import { testimonials, testimonialsReel } from "@/data/site";
 
 export default function Results() {
   return (
@@ -12,6 +12,15 @@ export default function Results() {
           eyebrow="Results"
           title="Our clients speak for us"
         />
+
+        {testimonialsReel.vimeoId && (
+          <Reveal className="mx-auto mt-12 max-w-3xl" delay={0.05}>
+            <p className="mb-4 text-center font-display text-lg font-medium text-ink">
+              {testimonialsReel.title}
+            </p>
+            <VimeoEmbed vimeoId={testimonialsReel.vimeoId} title={testimonialsReel.title} />
+          </Reveal>
+        )}
 
         <div className="mt-16 grid gap-6 md:grid-cols-3">
           {testimonials.map((t, i) => (

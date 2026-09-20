@@ -51,12 +51,12 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href={site.funnel.booking}
+                <Link
+                  href="/book"
                   className="inline-flex items-center gap-1.5 pt-1 text-accent transition hover:text-white"
                 >
                   Book Your Call &rarr;
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

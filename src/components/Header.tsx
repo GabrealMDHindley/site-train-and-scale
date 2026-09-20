@@ -47,12 +47,12 @@ export default function Header() {
         </nav>
 
         <div className="hidden md:block">
-          <a
-            href={site.funnel.booking}
+          <Link
+            href="/book"
             className="inline-flex items-center rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-ground transition hover:bg-white"
           >
             Book Your Call
-          </a>
+          </Link>
         </div>
 
         <button
@@ -85,12 +85,13 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
-            <a
-              href={site.funnel.booking}
+            <Link
+              href="/book"
               className="mt-2 inline-flex items-center justify-center rounded-full bg-accent px-5 py-3 text-sm font-semibold text-ground"
+              onClick={() => setOpen(false)}
             >
               Book Your Call
-            </a>
+            </Link>
           </nav>
         </div>
       )}

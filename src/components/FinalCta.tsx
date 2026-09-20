@@ -1,5 +1,5 @@
+import Link from "next/link";
 import Reveal from "./Reveal";
-import { site } from "@/data/site";
 
 export default function FinalCta() {
   return (
@@ -21,13 +21,13 @@ export default function FinalCta() {
             Book a call and we&rsquo;ll walk you through exactly what gets installed
             for your business.
           </p>
-          <a
-            href={site.funnel.booking}
+          <Link
+            href="/book"
             className="mt-9 inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-sm font-semibold uppercase tracking-wide text-ground transition hover:bg-white"
           >
             Book Your Call
             <span aria-hidden="true">&rarr;</span>
-          </a>
+          </Link>
         </Reveal>
       </div>
     </section>

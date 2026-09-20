@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
 import { site } from "@/data/site";
@@ -29,13 +30,13 @@ export default function ContactPage() {
             for your business.
           </p>
 
-          <a
-            href={site.funnel.booking}
+          <Link
+            href="/book"
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-ground transition hover:bg-white"
           >
             Book Your Call
             <span aria-hidden="true">&rarr;</span>
-          </a>
+          </Link>
 
           <dl className="mt-14 space-y-5 border-t border-white/10 pt-8 text-sm">
             <div>

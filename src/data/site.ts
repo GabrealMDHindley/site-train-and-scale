@@ -15,11 +15,6 @@ export const site = {
     zip: "89107",
     full: "304 S. Jones Blvd PMB 7597, Las Vegas, NV 89107",
   },
-  funnel: {
-    landing: "https://www.trainandscale.com/grownow",
-    booking: "https://www.trainandscale.com/bookrightnow",
-    confirmation: "https://www.trainandscale.com/consultationconfirmed",
-  },
   url: "https://trainandscale.com",
 } as const;
 
@@ -514,25 +509,42 @@ export const testimonials: Testimonial[] = [
     quote: "Went from $10,000/month to $10,000 per week.",
     name: "Colt",
     stat: "$10K/mo → $10K/wk",
+    vimeoId: "1031079685",
   },
   {
     quote: "Went from $10,000–$20,000/month to $50,000/month.",
     name: "Dapo & Jamal",
     stat: "$10–20K/mo → $50K/mo",
+    vimeoId: "1031081061",
   },
   {
     quote: "Went from $0 to $100,000 in revenue in just under 6 months.",
     name: "Peter",
     stat: "$0 → $100K in 6mo",
+    vimeoId: "1031077338",
   },
 ];
+
+// A collage reel of clips from several clients — its own slot, separate
+// from the individual testimonial cards above.
+export const testimonialsReel: { vimeoId: string | null; title: string } = {
+  vimeoId: "1031086554",
+  title: "What Our Clients Have To Say",
+};
 
 // The video sales letter — set to a real Vimeo ID once supplied, and the
 // section renders automatically on the next deploy. No ID → no section
 // (never a "coming soon" placeholder).
 export const vsl: { vimeoId: string | null; title: string } = {
-  vimeoId: null,
+  vimeoId: "1049908945",
   title: "Watch how the system works",
+};
+
+// Shown only on the gated /confirmation page, reached exclusively by
+// booking a call through the site's own calendar (see src/lib/booking.ts).
+export const confirmationVideo: { vimeoId: string | null; title: string } = {
+  vimeoId: "876727229",
+  title: "You're confirmed — watch this before we talk",
 };
 
 export const support = {

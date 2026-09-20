@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import HeroFallback from "./HeroFallback";
@@ -110,13 +111,13 @@ export default function Hero() {
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.34 }}
           className="mt-9 flex flex-wrap items-center gap-4"
         >
-          <a
-            href={site.funnel.booking}
+          <Link
+            href="/book"
             className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-ground transition hover:bg-white"
           >
             Book Your Call
             <span aria-hidden="true">&rarr;</span>
-          </a>
+          </Link>
           <a
             href="#how-it-works"
             className="inline-flex items-center gap-2 rounded-full border border-white/15 px-7 py-3.5 text-sm font-medium text-ink transition hover:border-accent/60 hover:text-accent"

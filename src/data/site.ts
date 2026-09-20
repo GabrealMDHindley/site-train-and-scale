@@ -8,7 +8,7 @@ export const site = {
   tagline: "Done-for-you client acquisition for high-ticket agencies, coaches, and consultants.",
   mission: "Helping high-ticket agencies, coaches, and consultants scale effortlessly.",
   email: "welcome@trainandscale.com",
-  url: "https://trainandscale.com",
+  url: "https://site.trainandscale.com",
 } as const;
 
 export type Stat = {

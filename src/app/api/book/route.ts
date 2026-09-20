@@ -1,7 +1,14 @@
 import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
-import { isValidBookingSlot } from "@/lib/booking";
-import { isBusinessStatus } from "@/lib/leadForm";
+import {
+  getAvailability,
+  upsertContact,
+  createAppointment,
+  ghlConfigured,
+  GhlApiError,
+  GhlConfigError,
+} from "@/lib/ghl";
+import { BUSINESS_STATUS_OPTIONS, isBusinessStatus } from "@/lib/leadForm";
 
 type BookingPayload = {
   firstName?: unknown;
@@ -10,8 +17,7 @@ type BookingPayload = {
   phone?: unknown;
   businessStatus?: unknown;
   message?: unknown;
-  date?: unknown;
-  time?: unknown;
+  startTime?: unknown;
 };
 
 function clean(value: unknown, max = 500): string {
@@ -19,6 +25,10 @@ function clean(value: unknown, max = 500): string {
 }
 
 export async function POST(request: Request) {
+  if (!ghlConfigured()) {
+    return NextResponse.json({ ok: false, reason: "not_configured" }, { status: 503 });
+  }
+
   let body: BookingPayload;
   try {
     body = await request.json();
@@ -32,49 +42,50 @@ export async function POST(request: Request) {
   const phone = clean(body.phone, 40);
   const businessStatus = clean(body.businessStatus, 20);
   const message = clean(body.message, 2000);
-  const date = clean(body.date, 10);
-  const time = clean(body.time, 20);
+  const startTime = clean(body.startTime, 40);
 
-  if (
-    !firstName ||
-    !lastName ||
-    !email ||
-    !phone ||
-    !isBusinessStatus(businessStatus) ||
-    !date ||
-    !time
-  ) {
+  if (!firstName || !lastName || !email || !phone || !isBusinessStatus(businessStatus) || !startTime) {
     return NextResponse.json({ ok: false, reason: "missing_fields" }, { status: 400 });
   }
-  if (!isValidBookingSlot(date, time)) {
-    return NextResponse.json({ ok: false, reason: "invalid_slot" }, { status: 400 });
-  }
 
-  // Best-effort forward to GoHighLevel once the client sets CRM_WEBHOOK_URL.
-  // The booking itself must succeed either way — the calendar has to work
-  // standalone before that webhook exists.
-  const webhook = process.env.CRM_WEBHOOK_URL;
-  if (webhook) {
-    try {
-      await fetch(webhook, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          phone,
-          businessStatus,
-          message,
-          date,
-          time,
-          source: "trainandscale.com/book",
-          submittedAt: new Date().toISOString(),
-        }),
-      });
-    } catch {
-      // Swallow — GHL forwarding is best-effort; the booking still stands.
+  try {
+    // Re-check live availability right before booking — closes the race
+    // window between the page loading and the visitor submitting, and is
+    // what actually prevents two people booking the same slot (GHL itself
+    // is the single source of truth here, not anything cached client-side).
+    const availability = await getAvailability();
+    const stillFree = availability.days.some((d) => d.slots.includes(startTime));
+    if (!stillFree) {
+      return NextResponse.json({ ok: false, reason: "slot_taken" }, { status: 409 });
     }
+
+    const businessStatusLabel =
+      BUSINESS_STATUS_OPTIONS.find((opt) => opt.value === businessStatus)?.label ?? businessStatus;
+
+    const contactId = await upsertContact({
+      firstName,
+      lastName,
+      email,
+      phone,
+      businessStatusLabel,
+      message,
+    });
+
+    await createAppointment({
+      contactId,
+      startTime,
+      slotMinutes: availability.slotMinutes,
+      title: `Discovery Call — ${firstName} ${lastName}`,
+    });
+  } catch (err) {
+    console.error("POST /api/book failed:", err);
+    if (err instanceof GhlConfigError) {
+      return NextResponse.json({ ok: false, reason: "not_configured" }, { status: 503 });
+    }
+    if (err instanceof GhlApiError) {
+      return NextResponse.json({ ok: false, reason: "ghl_error" }, { status: 502 });
+    }
+    return NextResponse.json({ ok: false, reason: "unknown_error" }, { status: 500 });
   }
 
   const res = NextResponse.json({ ok: true });

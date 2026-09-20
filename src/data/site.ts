@@ -20,7 +20,7 @@ export type Stat = {
 
 export const stats: Stat[] = [
   { target: 72, suffix: "hr", label: "To Your CRM + Funnel Live" },
-  { target: 30, label: "Pieces Of Content Every 30 Days" },
+  { target: 180, label: "Pieces Of Content Every 30 Days" },
   { target: 90, label: "Day Guarantee Window" },
   { target: 30, prefix: "$", suffix: "K", label: "Guaranteed In New Sales" },
 ];
@@ -28,8 +28,6 @@ export const stats: Stat[] = [
 export const guarantee = {
   headline: "We guarantee $30,000 in new sales — organically — within 90 days.",
   sub: "Or you get a full refund, including processing fees. That's how confident we are in the system.",
-  disclaimer:
-    "Guarantee applies to the organic 90-day track and is conditioned on completing the outreach, sales-call, and tracking requirements outlined in your service agreement.",
 } as const;
 
 export type TimelinePhase = {
@@ -189,9 +187,8 @@ const FOUNDATION_BUILD: ServiceGroup = {
 const CONTENT_ENGINE: ServiceGroup = {
   group: "Content Engine",
   items: [
-    "30 pieces of content written & posted every 30 days — Facebook",
-    "30 pieces of content written & posted every 30 days — Instagram",
-    "30 pieces of content written & posted every 30 days — LinkedIn",
+    "180 pieces of content written & posted every 30 days",
+    "Posted across Facebook, Instagram & LinkedIn",
   ],
 };
 

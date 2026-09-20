@@ -100,10 +100,10 @@ export default function InstallGrid() {
                       {group.group}
                     </h3>
                     <Stagger as="ul" className="mt-4 space-y-2.5" stagger={0.04} delay={0.2}>
-                      {group.items.map((item) => (
+                      {group.items.map((item, i) => (
                         <StaggerItem
                           as="li"
-                          key={item}
+                          key={`${i}-${item}`}
                           className="flex gap-2.5 text-sm leading-relaxed text-ink-dim"
                         >
                           <CheckIcon />

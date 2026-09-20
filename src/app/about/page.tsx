@@ -58,7 +58,6 @@ export default function AboutPage() {
             />
             <Reveal delay={0.28}>
               <p className="mt-4 text-ink-dim">{guarantee.headline}</p>
-              <p className="mt-3 text-sm text-ink-dim/80">{guarantee.disclaimer}</p>
             </Reveal>
           </div>
         </div>

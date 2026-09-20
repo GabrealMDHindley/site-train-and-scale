@@ -95,7 +95,7 @@ export default function Hero() {
           text={guarantee.headline}
           immediate
           delay={0.1}
-          className="text-balance max-w-4xl font-display text-[2.5rem] font-medium leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
+          className="text-balance max-w-4xl font-display text-[2.5rem] font-medium uppercase leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
         />
 
         <motion.p

@@ -58,9 +58,6 @@ export default function Guarantee() {
               className="glow-text text-balance font-display text-3xl font-medium leading-tight sm:text-5xl"
             />
             <p className="mt-5 text-balance text-ink-dim">{guarantee.sub}</p>
-            <p className="mx-auto mt-8 max-w-lg text-balance text-xs text-ink-dim/70">
-              {guarantee.disclaimer}
-            </p>
           </div>
         </Depth>
       </div>

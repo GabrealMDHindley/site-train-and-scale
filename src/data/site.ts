@@ -555,5 +555,4 @@ export const nav = [
   { label: "What We Install", href: "/#installs" },
   { label: "Results", href: "/#results" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
 ];

@@ -27,7 +27,7 @@ export default function Footer() {
               <li><Link href="/#installs" className="text-ink-dim transition hover:text-ink">What We Install</Link></li>
               <li><Link href="/#results" className="text-ink-dim transition hover:text-ink">Results</Link></li>
               <li><Link href="/about" className="text-ink-dim transition hover:text-ink">About</Link></li>
-              <li><Link href="/contact" className="text-ink-dim transition hover:text-ink">Contact</Link></li>
+              <li><Link href="/book" className="text-ink-dim transition hover:text-ink">Book a Call</Link></li>
             </ul>
           </div>
 

@@ -1,15 +1,7 @@
-const ITEMS = [
-  "Appointment Setting",
-  "High-Ticket Closing",
-  "Organic Content Engine",
-  "Paid Ads Management",
-  "CRM + Funnel Build",
-  "SMS & Email Automation",
-  "VSL Scripting & Editing",
-];
+import { serviceTags } from "@/data/site";
 
 export default function Marquee() {
-  const track = [...ITEMS, ...ITEMS];
+  const track = [...serviceTags, ...serviceTags];
   return (
     <div
       className="relative overflow-hidden border-y border-white/5 py-5"

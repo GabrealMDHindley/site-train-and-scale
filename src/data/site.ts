@@ -547,6 +547,17 @@ export const support = {
   ],
 };
 
+// What gets installed, as short tags — the marquee strip and the intro screen.
+export const serviceTags = [
+  "Appointment Setting",
+  "High-Ticket Closing",
+  "Organic Content Engine",
+  "Paid Ads Management",
+  "CRM + Funnel Build",
+  "SMS & Email Automation",
+  "VSL Scripting & Editing",
+];
+
 export const nav = [
   { label: "How It Works", href: "/#how-it-works" },
   { label: "What We Install", href: "/#installs" },

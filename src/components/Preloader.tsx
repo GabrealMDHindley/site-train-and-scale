@@ -1,26 +1,36 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+import { useCallback, useEffect, useState } from "react";
 import LogoDrawIn from "./LogoDrawIn";
+import Eyebrow from "./Eyebrow";
+import { hasWebGL } from "@/lib/webgl";
+import { serviceTags } from "@/data/site";
+
+const FieldScene = dynamic(() => import("./three/FieldScene"), { ssr: false });
 
 const SESSION_KEY = "ts-intro-seen";
+const TAG_INTERVAL = 650;
 
-// Plays once per session before the hero reveals. If the OpenArt logo-reveal
-// clip exists (public/videos/brand/logo-reveal.mp4) it plays that; otherwise
-// the code-only chevron draw-in ships as the default — never blocked on
-// video generation. Skippable, and skipped entirely under
-// prefers-reduced-motion.
+// Full-screen intro, once per session: the site's own 3D field runs as the
+// backdrop, the OpenArt logo-reveal clip is screen-blended and edge-masked
+// into it (so its black frame vanishes — no box), the real service tags
+// cycle underneath, and the whole scene zooms through into the hero.
+// Falls back to the code-only chevron draw-in without the clip, skippable,
+// and skipped entirely under prefers-reduced-motion.
 export default function Preloader({ hasVideo }: { hasVideo: boolean }) {
   const [closing, setClosing] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [field, setField] = useState<{ count: number } | null>(null);
+  const [tag, setTag] = useState(0);
+  const duration = hasVideo ? 4800 : 2400;
 
   const finish = useCallback(() => {
     setClosing(true);
     try {
       sessionStorage.setItem(SESSION_KEY, "1");
     } catch {}
-    window.setTimeout(() => setHidden(true), 550);
+    window.setTimeout(() => setHidden(true), 750);
   }, []);
 
   useEffect(() => {
@@ -43,34 +53,71 @@ export default function Preloader({ hasVideo }: { hasVideo: boolean }) {
       return;
     }
 
-    const timer = window.setTimeout(finish, hasVideo ? 4500 : 2400);
-    return () => window.clearTimeout(timer);
-  }, [finish, hasVideo]);
+    if (hasWebGL()) {
+      setField({ count: window.matchMedia("(max-width: 640px)").matches ? 220 : 420 });
+    }
+
+    const timer = window.setTimeout(finish, duration);
+    const cycle = window.setInterval(
+      () => setTag((t) => Math.min(t + 1, serviceTags.length - 1)),
+      TAG_INTERVAL
+    );
+    return () => {
+      window.clearTimeout(timer);
+      window.clearInterval(cycle);
+    };
+  }, [finish, duration]);
 
   if (hidden) return null;
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex items-center justify-center bg-ground transition-opacity duration-500 ${
-        closing ? "pointer-events-none opacity-0" : "opacity-100"
+      className={`fixed inset-0 z-[100] overflow-hidden bg-ground transition-[opacity,transform] duration-700 ease-out ${
+        closing ? "pointer-events-none scale-[1.06] opacity-0" : "scale-100 opacity-100"
       }`}
       role="status"
       aria-label="Loading Train & Scale"
     >
-      {hasVideo ? (
-        <video
-          ref={videoRef}
-          className="h-40 w-auto sm:h-56"
-          src="/videos/brand/logo-reveal.mp4"
-          poster="/videos/brand/poster.jpg"
-          autoPlay
-          muted
-          playsInline
-          onEnded={finish}
-        />
-      ) : (
-        <LogoDrawIn />
+      {field && (
+        <div className="absolute inset-0" aria-hidden="true">
+          <FieldScene count={field.count} />
+        </div>
       )}
+
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(45% 40% at 50% 48%, rgba(79,143,247,0.22) 0%, rgba(5,7,10,0) 70%)",
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="absolute inset-0 flex items-center justify-center">
+        {hasVideo ? (
+          <video
+            className="preloader-video"
+            src="/videos/brand/logo-reveal.mp4"
+            poster="/videos/brand/poster.jpg"
+            autoPlay
+            muted
+            playsInline
+            onEnded={finish}
+          />
+        ) : (
+          <LogoDrawIn />
+        )}
+      </div>
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-[22%] flex justify-center px-6">
+        <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-accent-deep">
+          <Eyebrow key={tag} text={serviceTags[tag]} immediate />
+        </p>
+      </div>
+
+      <div className="absolute inset-x-0 bottom-0 h-[2px] bg-white/5" aria-hidden="true">
+        <div className="preloader-rail h-full bg-accent-deep" style={{ animationDuration: `${duration}ms` }} />
+      </div>
 
       <button
         type="button"

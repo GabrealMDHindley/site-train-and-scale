@@ -5,6 +5,9 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import HeroFallback from "./HeroFallback";
+import KineticText from "./KineticText";
+import Decode from "./Decode";
+import Magnetic from "./Magnetic";
 import { hasWebGL, prefersReducedMotion } from "@/lib/webgl";
 import { site, guarantee } from "@/data/site";
 
@@ -84,33 +87,16 @@ export default function Hero() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mb-5 font-mono text-xs uppercase tracking-[0.28em] text-accent-deep"
         >
-          {site.tagline}
+          <Decode text={site.tagline} immediate />
         </motion.p>
 
-        {reducedMotion ? (
-          <h1 className="text-balance max-w-4xl font-display text-[2.5rem] font-medium leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
-            {guarantee.headline}
-          </h1>
-        ) : (
-          <h1
-            className="text-balance max-w-4xl font-display text-[2.5rem] font-medium leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
-            style={{ perspective: 800 }}
-          >
-            {guarantee.headline.split(" ").map((word, i) => (
-              <span key={i} className="mr-[0.28em] inline-block overflow-hidden align-bottom">
-                <motion.span
-                  className="inline-block"
-                  initial={{ y: "110%", rotateX: 60, opacity: 0 }}
-                  animate={{ y: "0%", rotateX: 0, opacity: 1 }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 + i * 0.05 }}
-                  style={{ transformOrigin: "bottom", display: "inline-block" }}
-                >
-                  {word}
-                </motion.span>
-              </span>
-            ))}
-          </h1>
-        )}
+        <KineticText
+          as="h1"
+          text={guarantee.headline}
+          immediate
+          delay={0.1}
+          className="text-balance max-w-4xl font-display text-[2.5rem] font-medium leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
+        />
 
         <motion.p
           initial={{ opacity: 0, y: 14 }}
@@ -127,13 +113,15 @@ export default function Hero() {
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.34 }}
           className="mt-9 flex flex-wrap items-center gap-4"
         >
-          <Link
-            href="/book"
-            className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-ground transition hover:bg-white"
-          >
-            Book Your Call
-            <span aria-hidden="true">&rarr;</span>
-          </Link>
+          <Magnetic>
+            <Link
+              href="/book"
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-ground transition hover:bg-white"
+            >
+              Book Your Call
+              <span aria-hidden="true">&rarr;</span>
+            </Link>
+          </Magnetic>
           <a
             href="#how-it-works"
             className="inline-flex items-center gap-2 rounded-full border border-white/15 px-7 py-3.5 text-sm font-medium text-ink transition hover:border-accent/60 hover:text-accent"

@@ -257,6 +257,15 @@ html.custom-cursor-active button {
   background: rgba(79, 143, 247, 0.12);
 }
 
+/* Sitewide 3D particle field (FieldBackdrop.tsx) — same layer as the
+   aurora, painted after it in DOM order. */
+.field-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
 /* Radio pills for the booking/lead forms' business-status question. */
 .form-radio {
   accent-color: var(--color-accent-deep);

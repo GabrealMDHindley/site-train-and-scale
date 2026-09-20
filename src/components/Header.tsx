@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Magnetic from "./Magnetic";
 import { nav, site } from "@/data/site";
 
 export default function Header() {
@@ -47,12 +48,14 @@ export default function Header() {
         </nav>
 
         <div className="hidden md:block">
-          <Link
-            href="/book"
-            className="inline-flex items-center rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-ground transition hover:bg-white"
-          >
-            Book Your Call
-          </Link>
+          <Magnetic strength={0.25}>
+            <Link
+              href="/book"
+              className="inline-flex items-center rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-ground transition hover:bg-white"
+            >
+              Book Your Call
+            </Link>
+          </Magnetic>
         </div>
 
         <button

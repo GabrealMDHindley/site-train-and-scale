@@ -22,7 +22,7 @@ export default function Timeline() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const ctx = gsap.context(() => {
       if (reduce) {
-        gsap.set("[data-phase]", { opacity: 1, x: 0 });
+        gsap.set("[data-phase], [data-phase-item]", { opacity: 1, x: 0 });
         if (railRef.current) gsap.set(railRef.current, { scaleY: 1 });
         return;
       }
@@ -47,16 +47,35 @@ export default function Timeline() {
       gsap.utils.toArray<HTMLElement>("[data-phase]").forEach((el, i) => {
         gsap.fromTo(
           el,
-          { opacity: 0, x: -24 },
+          { opacity: 0, x: -24, rotateY: -16, z: -60, transformPerspective: 1000, filter: "blur(6px)" },
           {
             opacity: 1,
             x: 0,
-            duration: 0.5,
-            ease: "power2.out",
+            rotateY: 0,
+            z: 0,
+            filter: "blur(0px)",
+            duration: 0.7,
+            ease: "power3.out",
             delay: (i % 5) * 0.03,
             scrollTrigger: {
               trigger: el,
               start: "top 88%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+        gsap.fromTo(
+          el.querySelectorAll("[data-phase-item]"),
+          { opacity: 0, x: 14 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.45,
+            stagger: 0.05,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
               toggleActions: "play none none reverse",
             },
           }
@@ -68,7 +87,7 @@ export default function Timeline() {
   }, [track]);
 
   return (
-    <section id="how-it-works" className="border-t border-white/5 bg-surface py-24 sm:py-32">
+    <section id="how-it-works" className="border-t border-white/5 bg-surface/70 py-24 sm:py-32">
       <div className="mx-auto max-w-5xl px-6 sm:px-8">
         <SectionHeading
           eyebrow="The Process"
@@ -127,7 +146,7 @@ export default function Timeline() {
                 </h3>
                 <ul className="mt-3 grid gap-x-8 gap-y-1.5 text-sm text-ink-dim sm:grid-cols-2">
                   {phase.items.map((item) => (
-                    <li key={item} className="flex gap-2">
+                    <li key={item} data-phase-item className="flex gap-2">
                       <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent-deep/70" />
                       {item}
                     </li>

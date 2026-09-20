@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Reveal from "./Reveal";
+import KineticText from "./KineticText";
+import Magnetic from "./Magnetic";
 
 export default function FinalCta() {
   return (
@@ -13,21 +15,25 @@ export default function FinalCta() {
         aria-hidden="true"
       />
       <div className="relative mx-auto max-w-2xl px-6 text-center sm:px-8">
-        <Reveal>
-          <h2 className="text-balance font-display text-3xl font-medium leading-tight sm:text-5xl">
-            Ready to have your pipeline built, staffed, and run for you?
-          </h2>
+        <KineticText
+          as="h2"
+          text="Ready to have your pipeline built, staffed, and run for you?"
+          className="text-balance font-display text-3xl font-medium leading-tight sm:text-5xl"
+        />
+        <Reveal delay={0.3}>
           <p className="mt-5 text-ink-dim">
             Book a call and we&rsquo;ll walk you through exactly what gets installed
             for your business.
           </p>
-          <Link
-            href="/book"
-            className="mt-9 inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-sm font-semibold uppercase tracking-wide text-ground transition hover:bg-white"
-          >
-            Book Your Call
-            <span aria-hidden="true">&rarr;</span>
-          </Link>
+          <Magnetic className="mt-9">
+            <Link
+              href="/book"
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-sm font-semibold uppercase tracking-wide text-ground transition hover:bg-white"
+            >
+              Book Your Call
+              <span aria-hidden="true">&rarr;</span>
+            </Link>
+          </Magnetic>
         </Reveal>
       </div>
     </section>

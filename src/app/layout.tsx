@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
+import FieldBackdrop from "@/components/FieldBackdrop";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -74,6 +75,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <span className="ambient-blob ambient-blob-b" />
           <span className="ambient-blob ambient-blob-c" />
         </div>
+        <FieldBackdrop />
         <div className="grain-overlay" />
         <Header />
         <main className="flex-1">{children}</main>

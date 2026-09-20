@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 import Depth from "./Depth";
+import KineticText from "./KineticText";
+import Decode from "./Decode";
 import { hasWebGL, prefersReducedMotion } from "@/lib/webgl";
 import { guarantee } from "@/data/site";
 
@@ -48,11 +50,13 @@ export default function Guarantee() {
               {showBadge && <GuaranteeScene reducedMotion={env?.reducedMotion ?? false} />}
             </div>
             <p className="mb-4 font-mono text-xs uppercase tracking-[0.28em] text-accent-deep">
-              The Guarantee
+              <Decode text="The Guarantee" />
             </p>
-            <h2 className="glow-text text-balance font-display text-3xl font-medium leading-tight sm:text-5xl">
-              {guarantee.headline}
-            </h2>
+            <KineticText
+              as="h2"
+              text={guarantee.headline}
+              className="glow-text text-balance font-display text-3xl font-medium leading-tight sm:text-5xl"
+            />
             <p className="mt-5 text-balance text-ink-dim">{guarantee.sub}</p>
             <p className="mx-auto mt-8 max-w-lg text-balance text-xs text-ink-dim/70">
               {guarantee.disclaimer}

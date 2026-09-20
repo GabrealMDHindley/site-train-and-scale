@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Line } from "@react-three/drei";
 import * as THREE from "three";
+import { makeGlowTexture } from "./glow";
 
 // Three ascending peaks, left → right, rhyming with the logo's stacked
 // chevron mark and the brand idea itself: train, then scale (climb).
@@ -17,26 +18,6 @@ function ridgeHeight(x: number, z: number): number {
 }
 
 const SCENE_OFFSET = new THREE.Vector3(0.3, -0.55, 0);
-
-function makeGlowTexture(hex: string, hard = true): THREE.CanvasTexture {
-  const c = document.createElement("canvas");
-  c.width = 64;
-  c.height = 64;
-  const ctx = c.getContext("2d")!;
-  const color = new THREE.Color(hex);
-  const r = Math.round(color.r * 255);
-  const g = Math.round(color.g * 255);
-  const b = Math.round(color.b * 255);
-  const rg = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-  rg.addColorStop(0, `rgba(${r},${g},${b},1)`);
-  rg.addColorStop(hard ? 0.55 : 0.35, `rgba(${r},${g},${b},.4)`);
-  rg.addColorStop(1, `rgba(${r},${g},${b},0)`);
-  ctx.fillStyle = rg;
-  ctx.fillRect(0, 0, 64, 64);
-  const tex = new THREE.CanvasTexture(c);
-  tex.needsUpdate = true;
-  return tex;
-}
 
 function WireframePeaks() {
   const geometry = useMemo(() => {

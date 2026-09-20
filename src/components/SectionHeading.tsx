@@ -1,4 +1,6 @@
 import Reveal from "./Reveal";
+import KineticText from "./KineticText";
+import Decode from "./Decode";
 
 export default function SectionHeading({
   eyebrow,
@@ -10,16 +12,20 @@ export default function SectionHeading({
   description?: string;
 }) {
   return (
-    <Reveal className="mx-auto max-w-2xl text-center">
+    <div className="mx-auto max-w-2xl text-center">
       <p className="mb-4 font-mono text-xs uppercase tracking-[0.28em] text-accent-deep">
-        {eyebrow}
+        <Decode text={eyebrow} />
       </p>
-      <h2 className="text-balance font-display text-3xl font-medium leading-tight sm:text-4xl md:text-5xl">
-        {title}
-      </h2>
+      <KineticText
+        as="h2"
+        text={title}
+        className="text-balance font-display text-3xl font-medium leading-tight sm:text-4xl md:text-5xl"
+      />
       {description && (
-        <p className="mt-4 text-balance text-ink-dim">{description}</p>
+        <Reveal delay={0.25}>
+          <p className="mt-4 text-balance text-ink-dim">{description}</p>
+        </Reveal>
       )}
-    </Reveal>
+    </div>
   );
 }

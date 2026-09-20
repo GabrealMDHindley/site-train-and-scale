@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import KineticText from "@/components/KineticText";
+import Decode from "@/components/Decode";
 import ContactForm from "@/components/ContactForm";
 import { site } from "@/data/site";
 
@@ -13,13 +15,18 @@ export default function ContactPage() {
   return (
     <section className="border-b border-white/5 px-6 pb-24 pt-40 sm:px-8 md:pb-32">
       <div className="mx-auto grid max-w-5xl gap-16 md:grid-cols-[1fr_1.1fr]">
-        <Reveal>
+        <div>
           <p className="mb-5 font-mono text-xs uppercase tracking-[0.28em] text-accent-deep">
-            Contact
+            <Decode text="Contact" immediate />
           </p>
-          <h1 className="text-balance font-display text-4xl font-medium leading-[1.08] sm:text-5xl">
-            Let&rsquo;s scale what you&rsquo;ve built.
-          </h1>
+          <KineticText
+            as="h1"
+            immediate
+            delay={0.1}
+            text="Let’s scale what you’ve built."
+            className="text-balance font-display text-4xl font-medium leading-[1.08] sm:text-5xl"
+          />
+          <Reveal delay={0.3}>
           <p className="mt-5 max-w-md text-ink-dim">
             The fastest way to talk to us is to book a call directly — you&rsquo;ll
             walk through your offer, your goals, and exactly what we&rsquo;d install
@@ -44,7 +51,8 @@ export default function ContactPage() {
               </dd>
             </div>
           </dl>
-        </Reveal>
+          </Reveal>
+        </div>
 
         <Reveal delay={0.1}>
           <div className="rounded-2xl border border-white/10 bg-surface p-7 sm:p-9">

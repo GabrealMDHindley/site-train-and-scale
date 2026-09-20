@@ -1,12 +1,14 @@
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
+import KineticText from "./KineticText";
+import { Stagger, StaggerItem } from "./Stagger";
 import Tilt from "./Tilt";
 import VimeoEmbed from "./VimeoEmbed";
 import { testimonials, testimonialsReel } from "@/data/site";
 
 export default function Results() {
   return (
-    <section id="results" className="border-t border-white/5 bg-surface py-24 sm:py-32">
+    <section id="results" className="border-t border-white/5 bg-surface/70 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
         <SectionHeading
           eyebrow="Results"
@@ -14,17 +16,21 @@ export default function Results() {
         />
 
         {testimonialsReel.vimeoId && (
-          <Reveal className="mx-auto mt-12 max-w-3xl" delay={0.05}>
-            <p className="mb-4 text-center font-display text-lg font-medium text-ink">
-              {testimonialsReel.title}
-            </p>
-            <VimeoEmbed vimeoId={testimonialsReel.vimeoId} title={testimonialsReel.title} />
-          </Reveal>
+          <div className="mx-auto mt-12 max-w-3xl">
+            <KineticText
+              as="p"
+              text={testimonialsReel.title}
+              className="mb-4 text-center font-display text-lg font-medium text-ink"
+            />
+            <Reveal delay={0.15}>
+              <VimeoEmbed vimeoId={testimonialsReel.vimeoId} title={testimonialsReel.title} />
+            </Reveal>
+          </div>
         )}
 
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
-          {testimonials.map((t, i) => (
-            <Reveal key={t.name} delay={i * 0.08}>
+        <Stagger className="mt-16 grid gap-6 md:grid-cols-3" stagger={0.12}>
+          {testimonials.map((t) => (
+            <StaggerItem key={t.name} className="h-full">
               <Tilt className="glass-card h-full overflow-hidden">
                 {t.vimeoId && (
                   <VimeoEmbed
@@ -43,9 +49,9 @@ export default function Results() {
                   </p>
                 </div>
               </Tilt>
-            </Reveal>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </div>
     </section>
   );

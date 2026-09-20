@@ -1,4 +1,4 @@
-import Reveal from "./Reveal";
+import { Stagger, StaggerItem } from "./Stagger";
 import Tilt from "./Tilt";
 import CountUp from "./CountUp";
 import { stats } from "@/data/site";
@@ -7,9 +7,9 @@ export default function Stats() {
   return (
     <section className="border-t border-white/5 py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 0.06}>
+        <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
+          {stats.map((s) => (
+            <StaggerItem key={s.label}>
               <Tilt className="glass-card overflow-hidden px-6 py-9 text-center">
                 <CountUp
                   target={s.target}
@@ -21,9 +21,9 @@ export default function Stats() {
                   {s.label}
                 </p>
               </Tilt>
-            </Reveal>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </div>
     </section>
   );

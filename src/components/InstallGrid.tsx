@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
+import KineticText from "./KineticText";
+import Decode from "./Decode";
+import { Stagger, StaggerItem } from "./Stagger";
 import Tilt from "./Tilt";
 import { packages } from "@/data/site";
 
@@ -71,36 +74,47 @@ export default function InstallGrid() {
             className="mt-12"
           >
             <p className="text-center font-mono text-xs uppercase tracking-[0.24em] text-ink-dim">
-              {active.subtitle}
+              <Decode key={active.id} text={active.subtitle} immediate />
             </p>
 
             <Tilt className="glass-card mx-auto mt-6 max-w-xl overflow-hidden px-8 py-7 text-center">
               <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-accent-deep">
                 The Guarantee
               </p>
-              <p className="glow-text mt-2 font-display text-2xl font-semibold sm:text-3xl">
-                {active.guarantee.headline}
-              </p>
+              <KineticText
+                key={active.id}
+                as="p"
+                immediate
+                delay={0.1}
+                text={active.guarantee.headline}
+                className="glow-text mt-2 font-display text-2xl font-semibold sm:text-3xl"
+              />
               <p className="mt-2 text-sm text-ink-dim">{active.guarantee.note}</p>
             </Tilt>
 
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <Stagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.09}>
               {active.groups.map((group) => (
-                <Tilt key={group.group} className="glass-card h-full overflow-hidden p-6 sm:p-7">
-                  <h3 className="font-display text-base font-medium text-ink sm:text-lg">
-                    {group.group}
-                  </h3>
-                  <ul className="mt-4 space-y-2.5">
-                    {group.items.map((item) => (
-                      <li key={item} className="flex gap-2.5 text-sm leading-relaxed text-ink-dim">
-                        <CheckIcon />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </Tilt>
+                <StaggerItem key={group.group} className="h-full">
+                  <Tilt className="glass-card h-full overflow-hidden p-6 sm:p-7">
+                    <h3 className="font-display text-base font-medium text-ink sm:text-lg">
+                      {group.group}
+                    </h3>
+                    <Stagger as="ul" className="mt-4 space-y-2.5" stagger={0.04} delay={0.2}>
+                      {group.items.map((item) => (
+                        <StaggerItem
+                          as="li"
+                          key={item}
+                          className="flex gap-2.5 text-sm leading-relaxed text-ink-dim"
+                        >
+                          <CheckIcon />
+                          <span>{item}</span>
+                        </StaggerItem>
+                      ))}
+                    </Stagger>
+                  </Tilt>
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
           </motion.div>
         </AnimatePresence>
       </div>

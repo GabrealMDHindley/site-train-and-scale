@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
 import KineticText from "./KineticText";
-import Decode from "./Decode";
+import Eyebrow from "./Eyebrow";
 import { Stagger, StaggerItem } from "./Stagger";
 import Tilt from "./Tilt";
 import { packages } from "@/data/site";
@@ -74,7 +74,7 @@ export default function InstallGrid() {
             className="mt-12"
           >
             <p className="text-center font-mono text-xs uppercase tracking-[0.24em] text-ink-dim">
-              <Decode key={active.id} text={active.subtitle} immediate />
+              <Eyebrow key={active.id} text={active.subtitle} immediate />
             </p>
 
             <Tilt className="glass-card mx-auto mt-6 max-w-xl overflow-hidden px-8 py-7 text-center">

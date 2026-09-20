@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import HeroFallback from "./HeroFallback";
 import KineticText from "./KineticText";
-import Decode from "./Decode";
+import Eyebrow from "./Eyebrow";
 import Magnetic from "./Magnetic";
 import { hasWebGL, prefersReducedMotion } from "@/lib/webgl";
 import { site, guarantee } from "@/data/site";
@@ -87,7 +87,7 @@ export default function Hero() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mb-5 font-mono text-xs uppercase tracking-[0.28em] text-accent-deep"
         >
-          <Decode text={site.tagline} immediate />
+          <Eyebrow text={site.tagline} immediate origin="left" />
         </motion.p>
 
         <KineticText

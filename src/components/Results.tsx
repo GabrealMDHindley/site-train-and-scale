@@ -8,7 +8,7 @@ import { testimonials, testimonialsReel } from "@/data/site";
 
 export default function Results() {
   return (
-    <section id="results" className="border-t border-white/5 bg-surface/70 py-24 sm:py-32">
+    <section id="results" className="border-t border-white/5 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
         <SectionHeading
           eyebrow="Results"

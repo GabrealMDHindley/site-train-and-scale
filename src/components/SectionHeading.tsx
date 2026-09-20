@@ -1,6 +1,6 @@
 import Reveal from "./Reveal";
 import KineticText from "./KineticText";
-import Decode from "./Decode";
+import Eyebrow from "./Eyebrow";
 
 export default function SectionHeading({
   eyebrow,
@@ -14,7 +14,7 @@ export default function SectionHeading({
   return (
     <div className="mx-auto max-w-2xl text-center">
       <p className="mb-4 font-mono text-xs uppercase tracking-[0.28em] text-accent-deep">
-        <Decode text={eyebrow} />
+        <Eyebrow text={eyebrow} />
       </p>
       <KineticText
         as="h2"

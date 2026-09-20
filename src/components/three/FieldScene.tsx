@@ -94,9 +94,35 @@ function Particles({ count }: { count: number }) {
         transparent
         depthWrite={false}
         blending={THREE.AdditiveBlending}
-        opacity={0.7}
+        opacity={0.8}
       />
     </points>
+  );
+}
+
+/** A slowly undulating wireframe floor — the hero's ridge motif carried under every section. */
+function Terrain() {
+  const geo = useMemo(() => {
+    const g = new THREE.PlaneGeometry(30, 16, 48, 24);
+    g.rotateX(-Math.PI / 2);
+    return g;
+  }, []);
+
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime();
+    const pos = geo.attributes.position;
+    for (let i = 0; i < pos.count; i++) {
+      const x = pos.getX(i);
+      const z = pos.getZ(i);
+      pos.setY(i, Math.sin(x * 0.45 + t * 0.25) * 0.25 + Math.cos(z * 0.6 - t * 0.2) * 0.2);
+    }
+    pos.needsUpdate = true;
+  });
+
+  return (
+    <mesh geometry={geo} position={[0, -3.4, -6]}>
+      <meshBasicMaterial color="#4f8ff7" wireframe transparent opacity={0.12} />
+    </mesh>
   );
 }
 
@@ -125,7 +151,7 @@ function Shapes() {
       {SHAPES.map((s, i) => (
         <mesh key={i} position={[s.pos[0], s.pos[1], s.pos[2]]}>
           <icosahedronGeometry args={[s.r, s.detail]} />
-          <meshBasicMaterial color="#4f8ff7" wireframe transparent opacity={0.18} />
+          <meshBasicMaterial color="#4f8ff7" wireframe transparent opacity={0.24} />
         </mesh>
       ))}
     </group>
@@ -143,6 +169,7 @@ export default function FieldScene({ count }: { count: number }) {
       <fog attach="fog" args={["#05070a", 6, 16]} />
       <Particles count={count} />
       <Shapes />
+      <Terrain />
     </Canvas>
   );
 }

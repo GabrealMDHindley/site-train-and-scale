@@ -4,7 +4,7 @@ import { site } from "@/data/site";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 bg-surface/80">
+    <footer className="border-t border-white/5">
       <div className="mx-auto max-w-6xl px-6 py-16 sm:px-8">
         <div className="grid gap-12 md:grid-cols-[1.2fr_1fr_1fr]">
           <div>

@@ -18,7 +18,7 @@ export default function BookPage() {
           title="Pick a day and time"
           description={`All times ${TIMEZONE_LABEL}. You'll get a confirmation the moment it's booked — no funnel, no redirect.`}
         />
-        <Reveal className="mt-12 rounded-2xl border border-white/10 bg-surface p-7 sm:p-9" delay={0.1}>
+        <Reveal className="glass-card mt-12 p-7 sm:p-9" delay={0.1}>
           <BookingForm />
         </Reveal>
       </div>

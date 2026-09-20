@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import KineticText from "@/components/KineticText";
-import Decode from "@/components/Decode";
+import Eyebrow from "@/components/Eyebrow";
 import ContactForm from "@/components/ContactForm";
 import { site } from "@/data/site";
 
@@ -17,7 +17,7 @@ export default function ContactPage() {
       <div className="mx-auto grid max-w-5xl gap-16 md:grid-cols-[1fr_1.1fr]">
         <div>
           <p className="mb-5 font-mono text-xs uppercase tracking-[0.28em] text-accent-deep">
-            <Decode text="Contact" immediate />
+            <Eyebrow text="Contact" immediate origin="left" />
           </p>
           <KineticText
             as="h1"
@@ -55,7 +55,7 @@ export default function ContactPage() {
         </div>
 
         <Reveal delay={0.1}>
-          <div className="rounded-2xl border border-white/10 bg-surface p-7 sm:p-9">
+          <div className="glass-card p-7 sm:p-9">
             <h2 className="font-display text-xl font-medium">Send us a message</h2>
             <p className="mt-2 text-sm text-ink-dim">
               Prefer to write it out first? Drop your details and we&rsquo;ll follow

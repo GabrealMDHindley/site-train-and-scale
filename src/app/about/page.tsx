@@ -3,7 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import KineticText from "@/components/KineticText";
-import Decode from "@/components/Decode";
+import Eyebrow from "@/components/Eyebrow";
 import { Stagger, StaggerItem } from "@/components/Stagger";
 import FinalCta from "@/components/FinalCta";
 import { guarantee, packages, site } from "@/data/site";
@@ -19,7 +19,7 @@ export default function AboutPage() {
       <section className="border-b border-white/5 px-6 pb-20 pt-40 sm:px-8 md:pb-28">
         <div className="mx-auto max-w-4xl">
           <p className="mb-5 font-mono text-xs uppercase tracking-[0.28em] text-accent-deep">
-            <Decode text="About Train & Scale" immediate />
+            <Eyebrow text="About Train & Scale" immediate origin="left" />
           </p>
           <KineticText
             as="h1"
@@ -64,7 +64,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-b border-white/5 bg-surface/70 py-20 sm:py-28">
+      <section className="border-b border-white/5 py-20 sm:py-28">
         <div className="mx-auto max-w-5xl px-6 sm:px-8">
           <SectionHeading
             eyebrow="What's Installed"
@@ -76,7 +76,7 @@ export default function AboutPage() {
               <StaggerItem
                 as="li"
                 key={p.id}
-                className="flex items-baseline justify-between gap-4 rounded-xl border border-white/10 bg-ground px-5 py-4 text-sm"
+                className="flex items-baseline justify-between gap-4 rounded-xl border border-white/10 bg-ground/50 px-5 py-4 text-sm"
               >
                 <span className="text-ink">{p.label}</span>
                 <span className="shrink-0 font-mono text-xs text-ink-dim">

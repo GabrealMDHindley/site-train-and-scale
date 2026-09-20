@@ -5,7 +5,7 @@ import { support } from "@/data/site";
 
 export default function TrainingSupport() {
   return (
-    <section className="border-t border-white/5 bg-surface/70 py-24 sm:py-32">
+    <section className="border-t border-white/5 py-24 sm:py-32">
       <div className="mx-auto max-w-4xl px-6 sm:px-8">
         <SectionHeading
           eyebrow="Training & Support"

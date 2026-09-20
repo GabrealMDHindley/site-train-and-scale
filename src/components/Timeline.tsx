@@ -87,7 +87,7 @@ export default function Timeline() {
   }, [track]);
 
   return (
-    <section id="how-it-works" className="border-t border-white/5 bg-surface/70 py-24 sm:py-32">
+    <section id="how-it-works" className="border-t border-white/5 py-24 sm:py-32">
       <div className="mx-auto max-w-5xl px-6 sm:px-8">
         <SectionHeading
           eyebrow="The Process"

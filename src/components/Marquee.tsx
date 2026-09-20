@@ -12,7 +12,7 @@ export default function Marquee() {
   const track = [...ITEMS, ...ITEMS];
   return (
     <div
-      className="relative overflow-hidden border-y border-white/5 bg-surface/60 py-5"
+      className="relative overflow-hidden border-y border-white/5 py-5"
       style={{
         maskImage:
           "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)",

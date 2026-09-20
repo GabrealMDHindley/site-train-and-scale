@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 import Depth from "./Depth";
 import KineticText from "./KineticText";
-import Decode from "./Decode";
+import Eyebrow from "./Eyebrow";
 import { hasWebGL, prefersReducedMotion } from "@/lib/webgl";
 import { guarantee } from "@/data/site";
 
@@ -50,7 +50,7 @@ export default function Guarantee() {
               {showBadge && <GuaranteeScene reducedMotion={env?.reducedMotion ?? false} />}
             </div>
             <p className="mb-4 font-mono text-xs uppercase tracking-[0.28em] text-accent-deep">
-              <Decode text="The Guarantee" />
+              <Eyebrow text="The Guarantee" />
             </p>
             <KineticText
               as="h2"

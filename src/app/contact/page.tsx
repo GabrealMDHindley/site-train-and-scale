@@ -10,10 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    site.address.full
-  )}`;
-
   return (
     <section className="border-b border-white/5 px-6 pb-24 pt-40 sm:px-8 md:pb-32">
       <div className="mx-auto grid max-w-5xl gap-16 md:grid-cols-[1fr_1.1fr]">
@@ -44,19 +40,6 @@ export default function ContactPage() {
               <dd className="mt-1">
                 <a href={`mailto:${site.email}`} className="text-ink transition hover:text-accent">
                   {site.email}
-                </a>
-              </dd>
-            </div>
-            <div>
-              <dt className="text-ink-dim">Address</dt>
-              <dd className="mt-1">
-                <a
-                  href={mapsHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-ink transition hover:text-accent"
-                >
-                  {site.address.full}
                 </a>
               </dd>
             </div>

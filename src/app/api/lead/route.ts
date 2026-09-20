@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
+import { isBusinessStatus } from "@/lib/leadForm";
 
 type LeadPayload = {
-  name?: unknown;
+  firstName?: unknown;
+  lastName?: unknown;
   email?: unknown;
   phone?: unknown;
+  businessStatus?: unknown;
   message?: unknown;
 };
 
@@ -19,12 +22,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, reason: "invalid_body" }, { status: 400 });
   }
 
-  const name = clean(body.name, 120);
+  const firstName = clean(body.firstName, 60);
+  const lastName = clean(body.lastName, 60);
   const email = clean(body.email, 160);
   const phone = clean(body.phone, 40);
+  const businessStatus = clean(body.businessStatus, 20);
   const message = clean(body.message, 2000);
 
-  if (!name || !email) {
+  if (!firstName || !lastName || !email || !phone || !isBusinessStatus(businessStatus)) {
     return NextResponse.json({ ok: false, reason: "missing_fields" }, { status: 400 });
   }
 
@@ -39,9 +44,11 @@ export async function POST(request: Request) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        name,
+        firstName,
+        lastName,
         email,
         phone,
+        businessStatus,
         message,
         source: "trainandscale.com/contact",
         submittedAt: new Date().toISOString(),

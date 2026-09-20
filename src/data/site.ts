@@ -4,17 +4,10 @@
 
 export const site = {
   name: "Train & Scale",
-  legalName: "Train & Scale LLC",
+  legalName: "Train And Scale LLC",
   tagline: "Done-for-you client acquisition for high-ticket agencies, coaches, and consultants.",
   mission: "Helping high-ticket agencies, coaches, and consultants scale effortlessly.",
-  email: "gabreal@trainandscale.com",
-  address: {
-    line1: "304 S. Jones Blvd PMB 7597",
-    city: "Las Vegas",
-    state: "NV",
-    zip: "89107",
-    full: "304 S. Jones Blvd PMB 7597, Las Vegas, NV 89107",
-  },
+  email: "welcome@trainandscale.com",
   url: "https://trainandscale.com",
 } as const;
 

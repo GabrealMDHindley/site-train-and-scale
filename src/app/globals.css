@@ -142,3 +142,124 @@ body {
     transform: none !important;
   }
 }
+
+/* Sitewide ambient backdrop — slow-drifting aurora blobs sitting behind all
+   in-flow content (negative z-index paints below normal-flow children but
+   above the body's own background-color). Pure CSS, GPU-composited. */
+.ambient-field {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.ambient-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  mix-blend-mode: screen;
+  opacity: 0.55;
+  will-change: transform;
+}
+.ambient-blob-a {
+  top: -12%;
+  left: -10%;
+  width: 42vw;
+  height: 42vw;
+  background: radial-gradient(circle, rgba(79, 143, 247, 0.35), transparent 70%);
+  animation: ambient-drift-a 26s ease-in-out infinite alternate;
+}
+.ambient-blob-b {
+  bottom: -16%;
+  right: -12%;
+  width: 46vw;
+  height: 46vw;
+  background: radial-gradient(circle, rgba(197, 230, 253, 0.22), transparent 70%);
+  animation: ambient-drift-b 32s ease-in-out infinite alternate;
+}
+.ambient-blob-c {
+  top: 38%;
+  left: 58%;
+  width: 30vw;
+  height: 30vw;
+  background: radial-gradient(circle, rgba(79, 143, 247, 0.2), transparent 70%);
+  animation: ambient-drift-c 22s ease-in-out infinite alternate;
+}
+@keyframes ambient-drift-a {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(6vw, 8vh) scale(1.15);
+  }
+}
+@keyframes ambient-drift-b {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(-8vw, -6vh) scale(1.1);
+  }
+}
+@keyframes ambient-drift-c {
+  from {
+    transform: translate(0, 0) scale(0.9);
+  }
+  to {
+    transform: translate(-5vw, 5vh) scale(1.1);
+  }
+}
+
+/* Custom magnetic cursor — desktop (pointer: fine) + motion-allowed only;
+   CustomCursor.tsx adds/removes .custom-cursor-active on <html>. */
+html.custom-cursor-active,
+html.custom-cursor-active a,
+html.custom-cursor-active button {
+  cursor: none;
+}
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  pointer-events: none;
+  z-index: 200;
+  will-change: transform;
+}
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border-radius: 9999px;
+  border: 1px solid rgba(197, 230, 253, 0.5);
+  pointer-events: none;
+  z-index: 199;
+  transition:
+    width 0.25s var(--ease-out),
+    height 0.25s var(--ease-out),
+    margin 0.25s var(--ease-out),
+    border-color 0.25s ease,
+    background 0.25s ease;
+  will-change: transform;
+}
+.cursor-ring-hover {
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-color: var(--color-accent-deep);
+  background: rgba(79, 143, 247, 0.12);
+}
+
+/* Radio pills for the booking/lead forms' business-status question. */
+.form-radio {
+  accent-color: var(--color-accent-deep);
+  width: 16px;
+  height: 16px;
+}

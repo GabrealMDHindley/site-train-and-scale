@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter, IBM_Plex_Mono } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SmoothScroll from "@/components/SmoothScroll";
+import CustomCursor from "@/components/CustomCursor";
+import ScrollProgress from "@/components/ScrollProgress";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -50,14 +53,6 @@ const jsonLd = {
   url: site.url,
   email: site.email,
   description: site.tagline,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: site.address.line1,
-    addressLocality: site.address.city,
-    addressRegion: site.address.state,
-    postalCode: site.address.zip,
-    addressCountry: "US",
-  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -71,6 +66,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <SmoothScroll />
+        <ScrollProgress />
+        <CustomCursor />
+        <div className="ambient-field" aria-hidden="true">
+          <span className="ambient-blob ambient-blob-a" />
+          <span className="ambient-blob ambient-blob-b" />
+          <span className="ambient-blob ambient-blob-c" />
+        </div>
         <div className="grain-overlay" />
         <Header />
         <main className="flex-1">{children}</main>

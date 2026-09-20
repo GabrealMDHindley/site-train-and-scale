@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { site } from "@/data/site";
+import { BUSINESS_STATUS_OPTIONS } from "@/lib/leadForm";
 
 type Status = "idle" | "sending" | "sent" | "fallback" | "error";
 
@@ -53,16 +54,29 @@ export default function ContactForm() {
     <form onSubmit={onSubmit} className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="mb-1.5 block text-xs uppercase tracking-wide text-ink-dim">
-            Name
+          <label htmlFor="firstName" className="mb-1.5 block text-xs uppercase tracking-wide text-ink-dim">
+            First Name
           </label>
           <input
-            id="name"
-            name="name"
+            id="firstName"
+            name="firstName"
             required
             className="w-full rounded-lg border border-white/10 bg-surface px-4 py-3 text-sm text-ink outline-none transition focus:border-accent-deep"
           />
         </div>
+        <div>
+          <label htmlFor="lastName" className="mb-1.5 block text-xs uppercase tracking-wide text-ink-dim">
+            Last Name
+          </label>
+          <input
+            id="lastName"
+            name="lastName"
+            required
+            className="w-full rounded-lg border border-white/10 bg-surface px-4 py-3 text-sm text-ink outline-none transition focus:border-accent-deep"
+          />
+        </div>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="email" className="mb-1.5 block text-xs uppercase tracking-wide text-ink-dim">
             Email
@@ -75,18 +89,38 @@ export default function ContactForm() {
             className="w-full rounded-lg border border-white/10 bg-surface px-4 py-3 text-sm text-ink outline-none transition focus:border-accent-deep"
           />
         </div>
+        <div>
+          <label htmlFor="phone" className="mb-1.5 block text-xs uppercase tracking-wide text-ink-dim">
+            Phone
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            required
+            className="w-full rounded-lg border border-white/10 bg-surface px-4 py-3 text-sm text-ink outline-none transition focus:border-accent-deep"
+          />
+        </div>
       </div>
-      <div>
-        <label htmlFor="phone" className="mb-1.5 block text-xs uppercase tracking-wide text-ink-dim">
-          Phone (optional)
-        </label>
-        <input
-          id="phone"
-          name="phone"
-          type="tel"
-          className="w-full rounded-lg border border-white/10 bg-surface px-4 py-3 text-sm text-ink outline-none transition focus:border-accent-deep"
-        />
-      </div>
+      <fieldset>
+        <legend className="mb-2 text-xs uppercase tracking-wide text-ink-dim">
+          Do you currently run a marketing, consulting, or coaching business?
+        </legend>
+        <div className="space-y-2">
+          {BUSINESS_STATUS_OPTIONS.map((opt, i) => (
+            <label key={opt.value} className="flex items-center gap-2.5 text-sm text-ink">
+              <input
+                type="radio"
+                name="businessStatus"
+                value={opt.value}
+                required={i === 0}
+                className="form-radio"
+              />
+              {opt.label}
+            </label>
+          ))}
+        </div>
+      </fieldset>
       <div>
         <label htmlFor="message" className="mb-1.5 block text-xs uppercase tracking-wide text-ink-dim">
           What are you looking to scale?

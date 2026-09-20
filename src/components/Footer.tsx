@@ -3,10 +3,6 @@ import Link from "next/link";
 import { site } from "@/data/site";
 
 export default function Footer() {
-  const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    site.address.full
-  )}`;
-
   return (
     <footer className="border-t border-white/5 bg-surface">
       <div className="mx-auto max-w-6xl px-6 py-16 sm:px-8">
@@ -43,11 +39,6 @@ export default function Footer() {
               <li>
                 <a href={`mailto:${site.email}`} className="transition hover:text-ink">
                   {site.email}
-                </a>
-              </li>
-              <li>
-                <a href={mapsHref} target="_blank" rel="noopener noreferrer" className="transition hover:text-ink">
-                  {site.address.full}
                 </a>
               </li>
               <li>

@@ -87,14 +87,30 @@ export default function Hero() {
           {site.tagline}
         </motion.p>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-          className="text-balance max-w-4xl font-display text-[2.5rem] font-medium leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
-        >
-          {guarantee.headline}
-        </motion.h1>
+        {reducedMotion ? (
+          <h1 className="text-balance max-w-4xl font-display text-[2.5rem] font-medium leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
+            {guarantee.headline}
+          </h1>
+        ) : (
+          <h1
+            className="text-balance max-w-4xl font-display text-[2.5rem] font-medium leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
+            style={{ perspective: 800 }}
+          >
+            {guarantee.headline.split(" ").map((word, i) => (
+              <span key={i} className="mr-[0.28em] inline-block overflow-hidden align-bottom">
+                <motion.span
+                  className="inline-block"
+                  initial={{ y: "110%", rotateX: 60, opacity: 0 }}
+                  animate={{ y: "0%", rotateX: 0, opacity: 1 }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 + i * 0.05 }}
+                  style={{ transformOrigin: "bottom", display: "inline-block" }}
+                >
+                  {word}
+                </motion.span>
+              </span>
+            ))}
+          </h1>
+        )}
 
         <motion.p
           initial={{ opacity: 0, y: 14 }}

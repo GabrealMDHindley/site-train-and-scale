@@ -286,7 +286,7 @@ export const packages: Package[] = [
     label: "Organic DIY",
     subtitle: "You set & close · 90 days",
     guarantee: {
-      headline: "$10,000 In New Sales, 90 Days",
+      headline: "$10,000 In New Cash Collected, 90 Days",
       note: GUARANTEE_DISCLAIMER,
     },
     groups: [
@@ -316,7 +316,7 @@ export const packages: Package[] = [
     label: "Closing Installed",
     subtitle: "1 closer staffed · 90 days",
     guarantee: {
-      headline: "$30,000 In New Sales, 90 Days",
+      headline: "$30,000 In New Cash Collected, 90 Days",
       note: GUARANTEE_DISCLAIMER,
     },
     groups: [
@@ -357,7 +357,7 @@ export const packages: Package[] = [
     label: "Setting Installed",
     subtitle: "1 setter staffed · 90 days",
     guarantee: {
-      headline: "$30,000 In New Sales, 90 Days",
+      headline: "$30,000 In New Cash Collected, 90 Days",
       note: GUARANTEE_DISCLAIMER,
     },
     groups: [
@@ -392,7 +392,7 @@ export const packages: Package[] = [
     label: "Full Organic Team",
     subtitle: "3 setters + 3 closers · 90 days",
     guarantee: {
-      headline: "$30,000 In New Sales, 90 Days",
+      headline: "$30,000 In New Cash Collected, 90 Days",
       note: GUARANTEE_DISCLAIMER,
     },
     groups: [
@@ -431,7 +431,7 @@ export const packages: Package[] = [
     label: "Full Team + Paid Ads",
     subtitle: "3 setters + 3 closers + ads · 120 days",
     guarantee: {
-      headline: "$100,000 In New Sales, 120 Days",
+      headline: "$100,000 In New Cash Collected, 120 Days",
       note: GUARANTEE_DISCLAIMER,
     },
     groups: [
@@ -563,4 +563,25 @@ export const nav = [
   { label: "What We Install", href: "/#installs" },
   { label: "Results", href: "/#results" },
   { label: "About", href: "/about" },
+];
+
+// Grouped by business model rather than one tile per industry, so a visitor
+// whose exact niche isn't named still reads themselves into a category
+// ("& more") instead of feeling disqualified. Every named example here is
+// one the client explicitly asked to list — no niches invented.
+export type IndustryGroup = { category: string; examples: string[] };
+
+export const industries: IndustryGroup[] = [
+  { category: "Marketing & AI Agencies", examples: ["Marketing Agencies", "AI Agencies"] },
+  { category: "Consulting & Coaching", examples: ["Consulting Businesses", "Coaching Businesses"] },
+  {
+    category: "E-Commerce & Retail",
+    examples: ["E-Commerce Businesses", "Clothing Brands", "Brick & Mortar Businesses"],
+  },
+  { category: "Tech & Software", examples: ["SAAS", "App Development", "Website Development"] },
+  {
+    category: "Content & Media",
+    examples: ["Content Creators", "Videographers", "Photographers"],
+  },
+  { category: "Real Estate & Franchises", examples: ["Real Estate Wholesale", "Franchises"] },
 ];

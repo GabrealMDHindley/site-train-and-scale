@@ -9,7 +9,7 @@ export default function VimeoEmbed({
 }) {
   return (
     <div
-      className={`relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-surface ${className}`}
+      className={`relative aspect-video overflow-hidden rounded-2xl border border-white/10 backdrop-blur-sm ${className}`}
     >
       <iframe
         src={`https://player.vimeo.com/video/${vimeoId}?title=0&byline=0&portrait=0&color=4f8ff7`}

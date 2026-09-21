@@ -76,7 +76,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <div className="glass-card absolute inset-x-3 top-[calc(100%+8px)] px-6 py-6 md:hidden">
+        <div className="glass-card !absolute inset-x-3 top-[calc(100%+8px)] px-6 py-6 md:hidden">
           <nav className="flex flex-col gap-5" aria-label="Primary mobile">
             {nav.map((item) => (
               <Link

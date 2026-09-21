@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import Stats from "@/components/Stats";
 import Mission from "@/components/Mission";
+import Industries from "@/components/Industries";
 import Timeline from "@/components/Timeline";
 import InstallGrid from "@/components/InstallGrid";
 import Vsl from "@/components/Vsl";
@@ -29,6 +30,7 @@ export default function Home() {
       <Marquee />
       <Stats />
       <Mission />
+      <Industries />
       <Timeline />
       <InstallGrid />
       <Vsl />

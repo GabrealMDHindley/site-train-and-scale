@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import LogoDrawIn from "./LogoDrawIn";
 import Eyebrow from "./Eyebrow";
 import { hasWebGL } from "@/lib/webgl";
@@ -23,9 +23,15 @@ export default function Preloader({ hasVideo }: { hasVideo: boolean }) {
   const [hidden, setHidden] = useState(false);
   const [field, setField] = useState<{ count: number } | null>(null);
   const [tag, setTag] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const duration = hasVideo ? 4800 : 2400;
 
   const finish = useCallback(() => {
+    // Stop playback immediately rather than letting it keep running through
+    // the fade-out: on iOS Safari a muted/inline video that's still marked
+    // "playing" while it visually shrinks/fades away can trigger automatic
+    // Picture-in-Picture, popping a floating mini-player over the page.
+    videoRef.current?.pause();
     setClosing(true);
     try {
       sessionStorage.setItem(SESSION_KEY, "1");
@@ -96,12 +102,15 @@ export default function Preloader({ hasVideo }: { hasVideo: boolean }) {
       <div className="absolute inset-0 flex items-center justify-center">
         {hasVideo ? (
           <video
+            ref={videoRef}
             className="preloader-video"
             src="/videos/brand/logo-reveal.mp4"
             poster="/videos/brand/poster.jpg"
             autoPlay
             muted
             playsInline
+            disablePictureInPicture
+            disableRemotePlayback
             onEnded={finish}
           />
         ) : (

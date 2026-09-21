@@ -565,23 +565,24 @@ export const nav = [
   { label: "About", href: "/about" },
 ];
 
-// Grouped by business model rather than one tile per industry, so a visitor
-// whose exact niche isn't named still reads themselves into a category
-// ("& more") instead of feeling disqualified. Every named example here is
-// one the client explicitly asked to list — no niches invented.
-export type IndustryGroup = { category: string; examples: string[] };
+// The three audiences Train & Scale actually serves (client instruction:
+// narrowed from a broader industry list to just these).
+export type Audience = { title: string; description: string };
 
-export const industries: IndustryGroup[] = [
-  { category: "Marketing & AI Agencies", examples: ["Marketing Agencies", "AI Agencies"] },
-  { category: "Consulting & Coaching", examples: ["Consulting Businesses", "Coaching Businesses"] },
+export const industries: Audience[] = [
   {
-    category: "E-Commerce & Retail",
-    examples: ["E-Commerce Businesses", "Clothing Brands", "Brick & Mortar Businesses"],
+    title: "Agency Owners",
+    description:
+      "Running a marketing, sales, or client-acquisition agency and ready to have your pipeline installed, staffed, and run for you.",
   },
-  { category: "Tech & Software", examples: ["SAAS", "App Development", "Website Development"] },
   {
-    category: "Content & Media",
-    examples: ["Content Creators", "Videographers", "Photographers"],
+    title: "Coaches",
+    description:
+      "Coaching high-ticket clients and ready to have setters, closers, and content handled so you can focus on delivery.",
   },
-  { category: "Real Estate & Franchises", examples: ["Real Estate Wholesale", "Franchises"] },
+  {
+    title: "Consultants",
+    description:
+      "Consulting on high-ticket engagements and ready to scale outreach without doing it yourself.",
+  },
 ];
